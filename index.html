@@ -307,7 +307,7 @@
         <span class="chip">ESP32</span><span class="chip">Arduino / AVR</span><span class="chip">C / C++</span>
         <span class="chip">USB HID</span><span class="chip">Bluetooth · Wi-Fi</span><span class="chip">UART</span>
         <span class="chip">Motores PAP</span><span class="chip">GRBL / CNC</span><span class="chip">Kinect</span>
-        <span class="chip">Processing</span><span class="chip">Python</span><span class="chip">Impresión 3D</span>
+        <span class="chip">Processing</span><span class="chip">Python</span><span class="chip">Impresión 3D</span><span class="chip">Apps web</span>
       </div>
     </div>
   </div>
@@ -447,6 +447,26 @@ const PROJECTS = [
       { src: "img/tragos-6.jpg", cap: "Vista interior: dosificadores, carro y correa" }
     ],
     docs: [{ text: "Informe técnico del proyecto (PDF)", href: "docs/maquina-de-tragos-informe-avr.pdf" }]
+  },
+  {
+    id: "llaveros", featured: true, cat: ["software"], key: "3D",
+    thumb: "img/llaveros-04.jpg",
+    title: "Taller de Llaveros: de una imagen a una pieza para imprimir en 3D",
+    meta: "2026 · Proyecto personal · en desarrollo",
+    role: "Desarrollada con asistencia de IA: definí qué tenía que hacer, probé cada versión y validé las piezas impresas",
+    desc: "Aplicación web que convierte un logo, un dibujo o una silueta en una pieza lista para imprimir en 3D. En seis etapas (imagen, preparación, contornos, diseño, vista 3D y exportación) separa el dibujo del fondo, genera los contornos y arma el modelo con base y relieve. Hace tres tipos de pieza: llaveros con ojal, toppers para torta con palito y cuentas o colgantes con perforación. Exporta 3MF multicolor y STL para Bambu Studio. Está construida sobre Extrudo, un CAD paramétrico libre que corre en el navegador (licencia GPL).",
+    tags: ["React + TypeScript", "CAD paramétrico (Extrudo)", "3MF multicolor", "Impresión 3D", "Desarrollo asistido con IA"],
+    videos: [],
+    photos: [
+      { src: "img/llaveros-01.jpg", cap: "1 · Imagen: se carga un logo o dibujo" },
+      { src: "img/llaveros-02.jpg", cap: "2 · Preparación: separa el dibujo del fondo" },
+      { src: "img/llaveros-03.jpg", cap: "3 · Contornos de un llavero, con el ojal arrastrable" },
+      { src: "img/llaveros-04.jpg", cap: "Vista 3D del llavero con relieve en dos colores" },
+      { src: "img/llaveros-05.jpg", cap: "Topper para torta: el palito se ubica arrastrándolo" },
+      { src: "img/llaveros-06.jpg", cap: "Vista 3D del topper" },
+      { src: "img/llaveros-07.jpg", cap: "Cuenta o colgante: la perforación se corre y se gira" },
+      { src: "img/llaveros-08.jpg", cap: "Vista 3D de la cuenta con su perforación" }
+    ]
   },
   {
     id: "pisaygana", featured: true, cat: ["interactivos"], key: "MAD",
@@ -646,7 +666,7 @@ function trace(seed) {
 
 function media(p, idx) {
   const n = p.videos.length;
-  const isTT = p.videos.every(v => v.tt);
+  const isTT = p.videos.length > 0 && p.videos.every(v => v.tt);
   const btn = el("button", { className: "media", type: "button", ariaLabel: `Ver ${n > 1 ? n + " videos" : "video"}: ${p.title}` });
   if (p.thumb) {
     btn.append(el("img", { src: p.thumb, alt: "", loading: "lazy" }));
@@ -660,7 +680,7 @@ function media(p, idx) {
   }
   const extras = [p.photos && `${p.photos.length} fotos`, p.docs && "informe PDF"].filter(Boolean);
   btn.append(
-    el("span", { className: "badge", textContent: [`${n} ${n > 1 ? "videos" : "video"}`, ...extras].join(" · ") }),
+    el("span", { className: "badge", textContent: [n ? `${n} ${n > 1 ? "videos" : "video"}` : null, ...extras].filter(Boolean).join(" · ") }),
 
     el("span", { className: "play", ariaHidden: "true" })
   );
@@ -676,7 +696,7 @@ function docLinks(p) {
 
 function featured(p, idx) {
   const a = el("article", { className: "feat" });
-  const more = el("button", { className: "more", type: "button", textContent: p.photos ? "Ver galería, videos y detalles" : "Ver videos y detalles" });
+  const more = el("button", { className: "more", type: "button", textContent: p.photos ? (p.videos.length ? "Ver galería, videos y detalles" : "Ver galería y detalles") : "Ver videos y detalles" });
   more.addEventListener("click", () => openModal(p));
   a.append(media(p, idx), el("div", { className: "body" },
     el("div", { className: "meta mono" }, el("span", { className: "num", textContent: pad(idx + 1) }), el("span", { textContent: p.meta })),
@@ -760,7 +780,7 @@ function openModal(p) {
   );
   const photos = p.photos ? carousel(p) : null;
   body.replaceChildren(...[
-    photos, vids,
+    photos, p.videos.length ? vids : null,
     p.role ? el("div", { className: "role-line", textContent: p.role }) : null,
     el("p", { textContent: p.desc }),
     tagList(p), docLinks(p), links
