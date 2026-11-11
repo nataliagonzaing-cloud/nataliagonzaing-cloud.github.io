@@ -232,25 +232,25 @@ const PROJECTS = [
     id: "madmultimedia", featured: true, cat: ["interactivos"],
     title: "Juegos interactivos para Imperial Cord",
     meta: "2015 · MadMultimedia · experiencia laboral",
-    role: "Desarrollo en la empresa MadMultimedia",
-    desc: "Dos juegos interactivos para activaciones de la marca Imperial Cord: un simulador de bicicleta y \"Pisá y ganá\", un juego que se juega pisando. Mi trabajo en MadMultimedia incluía programar la lógica de interacción y control, integrar sensores y dispositivos de entrada con el software, y encargarme de las pruebas y la puesta a punto.",
-    tags: ["Integración hardware/software", "Sensores", "Tiempo real", "Eventos"],
+    role: "A cargo de toda la electrónica y la programación",
+    desc: "Dos juegos interactivos para activaciones de la marca Imperial Cord. En el simulador de bicicleta, un Arduino Leonardo funciona como periférico de la PC para controlar un juego de bicicleta de licencia libre. En \"Pisá y ganá\", el público juega pisando: combiné Arduino UNO y Kinect con una aplicación desarrollada en Code::Blocks. Me encargué de la electrónica, la programación de las placas y la programación visual.",
+    tags: ["Arduino Leonardo", "Arduino UNO", "Kinect", "Code::Blocks (C/C++)", "Tiempo real"],
     videos: [{ yt: "xU7lLpEUwy4" }, { yt: "mzVIGX-gXHU" }]
   },
   {
     id: "streamdeck", cat: ["embebidos"],
-    title: "Stream Deck casero",
+    title: "Stream Deck casero para OBS",
     meta: "2021 · Proyecto personal",
-    desc: "Botonera de atajos tipo Stream Deck para controlar acciones en la PC. Los videos registran su desarrollo, desde las pruebas hasta el resultado final.",
-    tags: ["Prototipado", "Interfaz física", "USB"],
+    desc: "Botonera programable para controlar OBS, hecha con Arduino Leonardo, que la PC reconoce como un periférico USB. Tiene una matriz de 4x4 pulsadores más 4 botones extra, todos con teclas programables. Diseñé la caja y la imprimí en 3D, con cierre de imanes para acceder a la placa.",
+    tags: ["Arduino Leonardo", "USB HID", "Teclado matricial 4x4", "OBS", "Impresión 3D"],
     videos: [{ tt: "6954467149113019653" }, { tt: "6955490137996348678" }, { tt: "6956374782338174213" }, { tt: "6965547304954662150" }, { tt: "6965947314380737797" }]
   },
   {
-    id: "volante", cat: ["embebidos"],
-    title: "Volante para videojuegos con Arduino Leonardo",
-    meta: "Proyecto aplicado",
-    desc: "Volante para videojuegos construido con Arduino Leonardo.",
-    tags: ["Arduino Leonardo", "Mando de juego"],
+    id: "volante", cat: ["embebidos", "docencia"],
+    title: "Volante y pedales para videojuegos con Arduino Leonardo",
+    meta: "Docencia · proyecto de clase",
+    desc: "Volante y pedales para videojuegos en línea, armados para una clase. El giro y los pedales, que vuelven con resorte, se leen con potenciómetros, y el Leonardo convierte esas lecturas en teclas para la PC. El objetivo era que los estudiantes vieran que un potenciómetro alcanza para construir un periférico.",
+    tags: ["Arduino Leonardo", "USB HID", "Entradas analógicas", "Potenciómetros"],
     videos: [{ tt: "7285703967487675653" }]
   },
   {
@@ -262,11 +262,12 @@ const PROJECTS = [
     videos: [{ yt: "NCODMoO7XKo" }, { yt: "2QqdNRkJGW0" }]
   },
   {
-    id: "tragos", cat: ["embebidos"],
+    id: "tragos", featured: true, cat: ["embebidos"],
     title: "Máquina de hacer tragos",
-    meta: "2017",
-    desc: "Máquina que prepara tragos de forma automática.",
-    tags: ["Automatización"],
+    meta: "2017 · Proyecto universitario",
+    role: "En equipo con Luciano Gutiérrez",
+    desc: "Máquina que prepara tragos de forma automática. El trago se elige por Bluetooth; un motor paso a paso con correa lleva la plataforma del vaso hasta cada botella, donde un sistema de imanes la detiene en posición, y un actuador lineal presiona el dosificador para servir. Todo está controlado por un Arduino UNO programado directamente en AVR.",
+    tags: ["AVR (ATmega328P)", "Motor paso a paso", "Actuador lineal", "Bluetooth", "Automatización"],
     videos: [{ yt: "uHyXUMsP3EQ" }]
   },
   {
