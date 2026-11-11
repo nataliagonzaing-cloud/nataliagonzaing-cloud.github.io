@@ -79,7 +79,7 @@
     margin: 22px 0 0; max-width: 900px;
   }
   .hero .role b { color: var(--fuchsia); font-weight: 800; }
-  .wave { position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0; opacity: .55; pointer-events: none; }
+  .wave { position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0; opacity: .35; pointer-events: none; }
 
   .scoreboard {
     margin-top: clamp(32px, 5vw, 56px); border: 1px solid var(--fuchsia); background: rgba(0,0,0,.75);
@@ -95,7 +95,10 @@
     .scoreboard > div:nth-child(n+3) { border-top: 1px solid var(--fuchsia); }
   }
   .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; margin-top: 36px; align-items: end; }
-  .about p { margin: 0; max-width: 720px; font-size: 18px; }
+  .intro { max-width: 760px; display: grid; gap: 14px; }
+  .intro p { margin: 0; font-size: 18px; }
+  .intro p:first-child { font: 600 clamp(19px, 1.8vw, 22px)/1.45 var(--body); color: #fff; }
+  .intro p:first-child::first-letter { color: var(--fuchsia); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
   .chip { font: 400 12px var(--mono); text-transform: uppercase; letter-spacing: .05em; padding: 6px 10px; border: 1px solid var(--line); color: var(--ink); }
   @media (max-width: 820px) { .about { grid-template-columns: 1fr; } .chips { justify-content: flex-start; } }
@@ -227,6 +230,20 @@
   .vids .v.yt { width: min(720px, 86vw); aspect-ratio: 16 / 9; }
   .vids .v.tt { width: 325px; max-width: 80vw; height: 580px; }
   .vids iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .docs { display: flex; flex-wrap: wrap; gap: 10px; }
+  .doc {
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    font: 600 12px var(--wide); text-transform: uppercase; letter-spacing: .05em;
+    padding: 11px 16px; border: 1px solid var(--fuchsia); color: var(--ink); transition: background .2s, color .2s;
+  }
+  .doc::before { content: "PDF"; font: 600 11px var(--mono); background: var(--fuchsia); color: #000; padding: 2px 6px; }
+  .doc::after { content: "↗"; color: var(--fuchsia); }
+  .doc:hover { background: var(--fuchsia); color: #000; }
+  .doc:hover::after { color: #000; }
+  .photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .photos a { display: block; aspect-ratio: 1; overflow: hidden; border: 1px solid var(--line); }
+  .photos a:hover { border-color: var(--fuchsia); }
+  .photos img { width: 100%; height: 100%; object-fit: cover; }
   .m-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
   .m-links a { color: var(--fuchsia); font: 400 13px var(--mono); text-transform: uppercase; letter-spacing: .04em; }
 
@@ -255,17 +272,21 @@
   <div class="wrap">
     <div class="kicker mono">↘ Portafolio de proyectos</div>
     <h1>Natalia<br><em>Gonza</em></h1>
-    <p class="role">Ingeniera en Electrónica · <b>sistemas embebidos</b>, prototipado e interactividad</p>
+    <p class="role">Ingeniera en Electrónica y docente · <b>electrónica, programación</b> e instalaciones interactivas</p>
 
     <div class="scoreboard" role="list">
       <div role="listitem"><div class="n">2013</div><div class="t">Programando y enseñando Arduino desde</div></div>
       <div role="listitem"><div class="n" id="count">16</div><div class="t">Proyectos documentados en video</div></div>
-      <div role="listitem"><div class="n">39/39</div><div class="t">Materias aprobadas · Ingeniería UNM</div></div>
-      <div role="listitem"><div class="n">10</div><div class="t">Nota del Taller de Proyecto (CNC)</div></div>
+      <div role="listitem"><div class="n">3</div><div class="t">Títulos en electrónica y artes multimediales</div></div>
+      <div role="listitem"><div class="n">2</div><div class="t">Escuelas técnicas donde enseño hoy</div></div>
     </div>
 
     <div class="about">
-      <p>Ingeniera en Electrónica (UNM, orientación Redes) y Técnica en Artes Multimediales. Empecé con instalaciones interactivas y hoy enseño Sistemas Embebidos con ESP32 en escuelas técnicas preuniversitarias. Me gusta el ciclo completo de un prototipo: diseñarlo, armarlo, programarlo, encontrar la falla y dejarlo documentado.</p>
+      <div class="intro">
+        <p>Soy Ingeniera en Electrónica y Técnica en Artes Multimediales, y docente de materias técnicas en las escuelas secundarias preuniversitarias de la UNGS y la UNM.</p>
+        <p>Trabajo en el cruce entre la electrónica, la programación y el arte: diseño instalaciones multimediales e interactivas, desarrollo prototipos con microcontroladores y busco soluciones tecnológicas para problemas concretos.</p>
+        <p>Disfruto el proceso completo: pensar la idea, diseñar el circuito, programarlo, probarlo hasta que funcione y documentarlo. Y después, compartir lo aprendido en el aula.</p>
+      </div>
       <div class="chips">
         <span class="chip">ESP32</span><span class="chip">Arduino / AVR</span><span class="chip">C / C++</span>
         <span class="chip">USB HID</span><span class="chip">Bluetooth · Wi-Fi</span><span class="chip">UART</span>
@@ -372,25 +393,38 @@ const PROJECTS = [
     role: "Proyecto grupal de 3 integrantes · aprobado con 10",
     desc: "Diseñamos, construimos e integramos una router CNC de bajo costo para fresar y perforar placas PCB. Integramos la electrónica y la mecánica, configuramos el firmware GRBL y Universal Gcode Sender, la calibramos, la probamos y redactamos la memoria técnica.",
     tags: ["GRBL", "Arduino", "Universal Gcode Sender", "Integración electromecánica"],
-    videos: [{ tt: "7056554054926765317" }, { tt: "7062493947440008453" }, { tt: "7103254210283703558" }, { tt: "7142262119294045445" }]
+    videos: [{ tt: "7056554054926765317" }, { tt: "7062493947440008453" }, { tt: "7103254210283703558" }, { tt: "7142262119294045445" }],
+    docs: [{ text: "Memoria técnica (PDF, 143 págs.)", href: "docs/eunoia-cnc-memoria-tecnica.pdf" }]
   },
   {
-    id: "tragos", featured: true, cat: ["embebidos"], key: "AVR", ph: true,
+    id: "tragos", featured: true, cat: ["embebidos"], key: "AVR",
+    thumb: "img/tragos-4.jpg",
     title: "Máquina de hacer tragos",
-    meta: "2017 · Proyecto universitario",
+    meta: "2017 · UNM, Técnicas Digitales II",
     role: "En equipo con Luciano Gutiérrez",
-    desc: "Máquina que prepara tragos de forma automática. El trago se elige por Bluetooth; un motor paso a paso con correa lleva la plataforma del vaso hasta cada botella, donde un sistema de imanes la detiene en posición, y un actuador lineal presiona el dosificador para servir. Todo está controlado por un Arduino UNO programado directamente en AVR.",
-    tags: ["AVR (ATmega328P)", "Motor paso a paso", "Actuador lineal", "Bluetooth"],
-    videos: [{ yt: "uHyXUMsP3EQ" }]
+    desc: "Máquina que prepara tragos de forma automática, programada en C sobre AVR, sin el entorno de Arduino. El trago se elige desde el celular por Bluetooth. Un motor paso a paso con correa lleva el vaso hasta cada botella, y reed switches con imanes lo detienen en posición sin contar pasos. Un actuador lineal acciona los dosificadores, un servo abre la puerta y la iluminación acompaña cada etapa.",
+    tags: ["AVR en C", "Motor PAP + A4988", "UART / Bluetooth", "PWM y timers", "NeoPixel"],
+    videos: [{ yt: "uHyXUMsP3EQ" }],
+    photos: ["img/tragos-1.jpg", "img/tragos-2.jpg", "img/tragos-3.jpg", "img/tragos-4.jpg", "img/tragos-5.jpg", "img/tragos-6.jpg"],
+    docs: [{ text: "Informe técnico del proyecto (PDF)", href: "docs/maquina-de-tragos-informe-avr.pdf" }]
   },
   {
-    id: "madmultimedia", featured: true, cat: ["interactivos"], key: "MAD",
-    title: "Juegos interactivos para Imperial Cord",
-    meta: "2015 · MadMultimedia · experiencia laboral",
-    role: "A cargo de toda la electrónica y la programación",
-    desc: "Dos juegos interactivos para activaciones de la marca Imperial Cord. En el simulador de bicicleta, un Arduino Leonardo funciona como periférico de la PC para controlar un juego de bicicleta de licencia libre. En \"Pisá y ganá\", el público juega pisando: combiné Arduino UNO y Kinect con una aplicación desarrollada en Code::Blocks. Me encargué de la electrónica, la programación de las placas y la programación visual.",
-    tags: ["Arduino Leonardo", "Arduino UNO", "Kinect", "Code::Blocks (C/C++)"],
-    videos: [{ yt: "mzVIGX-gXHU" }, { yt: "xU7lLpEUwy4" }]
+    id: "pisaygana", featured: true, cat: ["interactivos"], key: "MAD",
+    title: "Pisá y ganá: juego interactivo de piso",
+    meta: "2015 · MadMultimedia · para Imperial Cord",
+    role: "A cargo de la electrónica y la programación",
+    desc: "Juego interactivo para una activación de la marca Imperial Cord: el público juega pisando. Combiné Arduino UNO y Kinect con una aplicación desarrollada en Code::Blocks. Me encargué de la electrónica, la programación de la placa y la programación visual.",
+    tags: ["Arduino UNO", "Kinect", "Code::Blocks (C/C++)", "Tiempo real"],
+    videos: [{ yt: "mzVIGX-gXHU" }]
+  },
+  {
+    id: "bici", featured: true, cat: ["interactivos"], key: "BICI",
+    title: "Simulador de bicicleta",
+    meta: "2015 · MadMultimedia · para Imperial Cord",
+    role: "A cargo de la electrónica y la programación",
+    desc: "Simulador para una activación de la marca Imperial Cord: el público pedalea una bicicleta real para jugar en pantalla. Un Arduino Leonardo funciona como periférico de la PC y traduce la bicicleta en controles para un juego de bicicleta de licencia libre.",
+    tags: ["Arduino Leonardo", "USB HID", "Interfaz física"],
+    videos: [{ yt: "xU7lLpEUwy4" }]
   },
   {
     id: "streamdeck", cat: ["embebidos"], key: "OBS",
@@ -547,7 +581,9 @@ function media(p, idx) {
   const n = p.videos.length;
   const isTT = p.videos.every(v => v.tt);
   const btn = el("button", { className: "media", type: "button", ariaLabel: `Ver ${n > 1 ? n + " videos" : "video"}: ${p.title}` });
-  if (!isTT && !p.ph) {
+  if (p.thumb) {
+    btn.append(el("img", { src: p.thumb, alt: "", loading: "lazy" }));
+  } else if (!isTT) {
     const first = p.videos.find(v => v.yt);
     btn.append(el("img", { src: `https://i.ytimg.com/vi/${first.yt}/hqdefault.jpg`, alt: "", loading: "lazy" }));
   } else {
@@ -555,8 +591,9 @@ function media(p, idx) {
     ph.append(trace(idx + 3), el("span", { className: "word", textContent: p.key || pad(idx + 1) }));
     btn.append(ph);
   }
+  const extras = [p.photos && `${p.photos.length} fotos`, p.docs && "informe PDF"].filter(Boolean);
   btn.append(
-    el("span", { className: "badge", textContent: `${isTT ? "TikTok" : "YouTube"} · ${n} ${n > 1 ? "videos" : "video"}` }),
+    el("span", { className: "badge", textContent: [`${n} ${n > 1 ? "videos" : "video"}`, ...extras].join(" · ") }),
 
     el("span", { className: "play", ariaHidden: "true" })
   );
@@ -565,6 +602,10 @@ function media(p, idx) {
 }
 
 function tagList(p) { return el("div", { className: "tags" }, p.tags.map(t => el("span", { textContent: t }))); }
+function docLinks(p) {
+  if (!p.docs) return null;
+  return el("div", { className: "docs" }, p.docs.map(d => el("a", { className: "doc", href: d.href, target: "_blank", rel: "noopener", textContent: d.text })));
+}
 
 function featured(p, idx) {
   const a = el("article", { className: "feat" });
@@ -575,7 +616,7 @@ function featured(p, idx) {
     el("h3", { textContent: p.title }),
     p.role ? el("div", { className: "role-line", textContent: p.role }) : null,
     el("p", { textContent: p.desc }),
-    tagList(p), more
+    tagList(p), docLinks(p), more
   ));
   return a;
 }
@@ -614,11 +655,13 @@ function openModal(p) {
     })),
     p.extra ? el("a", { href: p.extra.href, target: "_blank", rel: "noopener", textContent: p.extra.text + " ↗" }) : null
   );
+  const photos = p.photos ? el("div", { className: "photos" }, p.photos.map(src =>
+    el("a", { href: src, target: "_blank", rel: "noopener" }, el("img", { src, alt: "Foto de " + p.title })))) : null;
   body.replaceChildren(...[
     vids,
     p.role ? el("div", { className: "role-line", textContent: p.role }) : null,
     el("p", { textContent: p.desc }),
-    tagList(p), links
+    tagList(p), docLinks(p), photos, links
   ].filter(Boolean));
   modal.showModal();
 }
