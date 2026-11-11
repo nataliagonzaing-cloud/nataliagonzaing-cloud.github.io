@@ -4,223 +4,369 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Natalia Gonza · Proyectos</title>
-<meta name="description" content="Portafolio de proyectos de electrónica, sistemas embebidos e interactivos de Natalia Sabrina Gonza, Ingeniera en Electrónica.">
+<meta name="description" content="Portafolio de Natalia Sabrina Gonza, Ingeniera en Electrónica: sistemas embebidos, prototipado e interactividad.">
+<meta name="color-scheme" content="dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,800&family=Bebas+Neue&family=Overpass+Mono:wght@400;600&family=Overpass:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f6f5f1;
-    --surface: #ffffff;
-    --ink: #1b1d1f;
-    --muted: #5d6267;
-    --line: #e2e0d8;
-    --accent: #0f7a5c;
-    --accent-soft: #e2f2ec;
-    --chip: #efeee8;
-    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.05);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #121416;
-      --surface: #1b1e21;
-      --ink: #eceeef;
-      --muted: #a3a9ae;
-      --line: #2c3035;
-      --accent: #4fd1a5;
-      --accent-soft: #173229;
-      --chip: #24282c;
-      --shadow: none;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #121416; --surface: #1b1e21; --ink: #eceeef; --muted: #a3a9ae;
-    --line: #2c3035; --accent: #4fd1a5; --accent-soft: #173229; --chip: #24282c; --shadow: none;
+    --bg: #000;
+    --bg-2: #0c0c0c;
+    --panel: #121212;
+    --line: #2a2a2a;
+    --ink: #f0f0f0;
+    --muted: #a0a0a0;
+    --fuchsia: #ff198f;
+    --green: #009a5d;
+    --blue: #3f4a92;
+    --rose: #e299a8;
+    --cyan: #9bb5da;
+    --display: "Bebas Neue", "Arial Narrow", sans-serif;
+    --wide: "Archivo", "Arial Black", sans-serif;
+    --body: "Overpass", system-ui, sans-serif;
+    --mono: "Overpass Mono", ui-monospace, monospace;
+    --gutter: clamp(16px, 4vw, 56px);
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+    font: 300 17px/1.6 var(--body);
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--accent); }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: var(--fuchsia); color: #000; }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 0 var(--gutter); }
+  .mono { font-family: var(--mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
 
-  header { padding: 64px 0 36px; border-bottom: 1px solid var(--line); }
-  .kicker { font: 500 13px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-  h1 { font-size: clamp(32px, 6vw, 52px); line-height: 1.05; margin: 14px 0 12px; letter-spacing: -.02em; }
-  .role { font-size: clamp(17px, 2.4vw, 21px); color: var(--muted); margin: 0 0 22px; max-width: 760px; }
-  .bio { max-width: 760px; margin: 0 0 26px; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px; }
-  .links a {
-    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
-    padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px;
-    color: var(--ink); background: var(--surface); font-weight: 500; font-size: 15px;
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(0,0,0,.82); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-  .links a:hover { border-color: var(--accent); color: var(--accent); }
-  .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
-  .skills span { font: 13px/1 "IBM Plex Mono", monospace; padding: 7px 10px; background: var(--chip); border-radius: 6px; }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .mark {
+    font: 400 30px/1 var(--display); letter-spacing: .02em; text-decoration: none;
+    color: var(--fuchsia); display: flex; align-items: center; gap: 10px;
+  }
+  .mark span { width: 10px; height: 10px; background: var(--fuchsia); display: inline-block; }
+  .nav ul { display: flex; gap: clamp(14px, 3vw, 36px); list-style: none; margin: 0; padding: 0; }
+  .nav a.l { font: 600 12px var(--wide); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+  .nav a.l:hover { color: var(--fuchsia); }
+  .nav a.l::before { content: "› "; color: var(--fuchsia); opacity: 0; transition: opacity .15s; }
+  .nav a.l:hover::before { opacity: 1; }
+  @media (max-width: 560px) { .nav ul li:nth-child(1), .nav ul li:nth-child(3) { display: none; } }
 
-  nav.filters { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
-  nav.filters .wrap { display: flex; gap: 8px; padding-top: 12px; padding-bottom: 12px; overflow-x: auto; }
-  nav.filters button {
-    font: 500 14px "IBM Plex Sans", sans-serif; white-space: nowrap; cursor: pointer;
-    padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
-    background: var(--surface); color: var(--ink);
-  }
-  nav.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-
-  main { padding: 36px 0 72px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 22px; }
-  @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
-
-  .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-    overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow);
-  }
-  .card.featured { grid-column: span 2; }
-  @media (max-width: 760px) { .card.featured { grid-column: auto; } }
-  .card.pending { border-style: dashed; background: transparent; box-shadow: none; }
-
-  .media { display: flex; gap: 2px; background: #000; }
-  .player { position: relative; flex: 1; aspect-ratio: 16 / 9; background: #0b0c0d; }
-  .player.vertical { aspect-ratio: 9 / 16; flex: 0 0 min(250px, 70%); scroll-snap-align: start; }
-  .media:has(.vertical) {
-    gap: 10px; padding: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
-    justify-content: flex-start; scrollbar-width: thin; scroll-padding-inline: 10px;
-  }
-  .media:has(.vertical:only-child) { justify-content: center; }
-  .card:not(.featured) .player.vertical { flex: 0 0 auto; height: 300px; }
-  .card.featured .media { justify-content: center; }
-  .player button {
-    all: unset; cursor: pointer; position: absolute; inset: 0; display: grid; place-items: center;
-    background-size: cover; background-position: center;
-  }
-  .player button::after {
-    content: ""; width: 64px; height: 64px; border-radius: 50%;
-    background: rgba(0,0,0,.62) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center / 30px no-repeat;
-    transition: transform .15s;
-  }
-  .player button:hover::after, .player button:focus-visible::after { transform: scale(1.1); }
-  .player button:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
-  .player .label {
-    position: absolute; left: 10px; bottom: 10px; z-index: 1; pointer-events: none;
-    font: 500 12px "IBM Plex Mono", monospace; color: #fff; background: rgba(0,0,0,.6);
-    padding: 4px 8px; border-radius: 4px;
-  }
-  .player.tiktok button {
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative; overflow: hidden; border-bottom: 1px solid var(--line);
     background:
-      radial-gradient(circle at 30% 20%, rgba(79,209,165,.28), transparent 55%),
-      radial-gradient(circle at 80% 85%, rgba(255,0,80,.18), transparent 50%),
-      #111518;
+      radial-gradient(rgba(255,255,255,.07) 1px, transparent 1.2px) 0 0 / 6px 6px,
+      var(--bg);
   }
-  .player .tt-caption {
-    position: absolute; left: 0; right: 0; top: calc(50% + 46px); text-align: center; pointer-events: none;
-    color: #e9eef0; font: 500 14px "IBM Plex Sans", sans-serif; padding: 0 16px;
+  .hero .wrap { position: relative; z-index: 1; padding-top: clamp(48px, 9vw, 110px); padding-bottom: clamp(40px, 6vw, 72px); }
+  .hero .kicker { color: var(--fuchsia); display: flex; align-items: center; gap: 10px; }
+  .hero h1 {
+    font: 400 clamp(72px, 15vw, 220px)/.86 var(--display);
+    margin: 18px 0 0; letter-spacing: .005em; text-transform: uppercase;
   }
-  .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .hero h1 em { font-style: normal; color: var(--fuchsia); }
+  .hero .role {
+    font: 800 clamp(16px, 2.3vw, 28px)/1.15 var(--wide); text-transform: uppercase;
+    margin: 22px 0 0; max-width: 900px;
+  }
+  .hero .role b { color: var(--fuchsia); font-weight: 800; }
+  .wave { position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0; opacity: .55; pointer-events: none; }
 
-  .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-  .meta { font: 500 12px "IBM Plex Mono", monospace; color: var(--muted); letter-spacing: .03em; text-transform: uppercase; }
-  .card h2 { font-size: 20px; line-height: 1.25; margin: 0; }
-  .card p { margin: 0; color: var(--ink); }
-  .role-line { font-size: 14px; color: var(--muted); }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
-  .tags span { font: 12px "IBM Plex Mono", monospace; padding: 5px 8px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); }
-  .extra { font-size: 14px; }
-  .pending .body { color: var(--muted); }
+  .scoreboard {
+    margin-top: clamp(32px, 5vw, 56px); border: 1px solid var(--fuchsia); background: rgba(0,0,0,.75);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .scoreboard > div { padding: 18px 20px; border-left: 1px solid var(--fuchsia); }
+  .scoreboard > div:first-child { border-left: 0; }
+  .scoreboard .n { font: 400 clamp(40px, 5vw, 60px)/1 var(--display); color: var(--fuchsia); }
+  .scoreboard .t { font: 400 12px/1.35 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-top: 6px; }
+  @media (max-width: 820px) {
+    .scoreboard { grid-template-columns: repeat(2, 1fr); }
+    .scoreboard > div:nth-child(3) { border-left: 0; }
+    .scoreboard > div:nth-child(n+3) { border-top: 1px solid var(--fuchsia); }
+  }
+  .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; margin-top: 36px; align-items: end; }
+  .about p { margin: 0; max-width: 720px; font-size: 18px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+  .chip { font: 400 12px var(--mono); text-transform: uppercase; letter-spacing: .05em; padding: 6px 10px; border: 1px solid var(--line); color: var(--ink); }
+  @media (max-width: 820px) { .about { grid-template-columns: 1fr; } .chips { justify-content: flex-start; } }
 
-  section.about { border-top: 1px solid var(--line); padding: 40px 0 0; margin-top: 48px; }
-  section.about h2 { font-size: 22px; margin: 0 0 16px; }
-  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-  .cols h3 { font-size: 15px; margin: 0 0 6px; }
-  .cols ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+  /* ---------- SECTIONS ---------- */
+  section.block { padding: clamp(56px, 8vw, 104px) 0; border-bottom: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+  .sec-head h2 { font: 400 clamp(48px, 8vw, 104px)/.9 var(--display); margin: 0; text-transform: uppercase; }
+  .sec-head h2 small { display: block; font: 600 13px var(--mono); color: var(--fuchsia); letter-spacing: .1em; margin-bottom: 10px; }
 
-  footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 14px; }
+  /* ---------- FEATURED ---------- */
+  .featured { display: grid; gap: 28px; }
+  .feat {
+    display: grid; grid-template-columns: 1.25fr 1fr; border: 1px solid var(--line); background: var(--bg-2);
+    transition: border-color .2s;
+  }
+  .feat:nth-child(even) { grid-template-columns: 1fr 1.25fr; }
+  .feat:nth-child(even) .media { order: 2; }
+  .feat:hover { border-color: var(--fuchsia); }
+  .feat .media { aspect-ratio: 16 / 9; height: 100%; min-height: 100%; }
+  .feat .body { padding: clamp(22px, 3vw, 40px); display: flex; flex-direction: column; gap: 14px; }
+  .feat h3 { font: 800 clamp(22px, 2.4vw, 32px)/1.1 var(--wide); text-transform: uppercase; margin: 0; }
+  .feat p { margin: 0; }
+  @media (max-width: 900px) {
+    .feat, .feat:nth-child(even) { grid-template-columns: 1fr; }
+    .feat:nth-child(even) .media { order: 0; }
+  }
+
+  /* ---------- MEDIA / PLACEHOLDER ---------- */
+  .media {
+    position: relative; overflow: hidden; background: #050505; cursor: pointer; border: 0; padding: 0;
+    width: 100%; display: block; color: inherit; text-align: left;
+  }
+  .media img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.85) contrast(1.05); transition: filter .3s, transform .4s; }
+  .media:hover img, .media:focus-visible img { filter: none; transform: scale(1.03); }
+  .media:focus-visible { outline: 2px solid var(--fuchsia); outline-offset: -2px; }
+  .media .badge {
+    position: absolute; left: 0; bottom: 0; z-index: 2;
+    background: var(--fuchsia); color: #000; font: 600 12px var(--mono); text-transform: uppercase; letter-spacing: .05em;
+    padding: 7px 12px;
+  }
+  .media .play {
+    position: absolute; right: 14px; bottom: 12px; z-index: 2; width: 44px; height: 44px; border: 1px solid #fff;
+    display: grid; place-items: center; background: rgba(0,0,0,.5); transition: background .2s, border-color .2s;
+  }
+  .media .play::after { content: ""; border-left: 12px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 3px; }
+  .media:hover .play { background: var(--fuchsia); border-color: var(--fuchsia); }
+  .ph {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    background:
+      linear-gradient(rgba(255,25,143,.10) 1px, transparent 1px) 0 0 / 28px 28px,
+      linear-gradient(90deg, rgba(255,25,143,.10) 1px, transparent 1px) 0 0 / 28px 28px,
+      radial-gradient(circle at 70% 30%, rgba(63,74,146,.55), transparent 60%),
+      #070707;
+  }
+  .ph .word { font: 400 clamp(64px, 10vw, 150px)/1 var(--display); color: transparent; -webkit-text-stroke: 1.5px var(--fuchsia); letter-spacing: .02em; transition: color .3s; }
+  .media:hover .ph .word { color: var(--fuchsia); }
+  .ph .trace { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* ---------- FILTERS + GRID ---------- */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .filters button {
+    font: 600 12px var(--wide); text-transform: uppercase; letter-spacing: .05em; cursor: pointer;
+    padding: 10px 16px; border: 1px solid var(--line); background: transparent; color: var(--ink);
+  }
+  .filters button:hover { border-color: var(--fuchsia); }
+  .filters button[aria-pressed="true"] { background: var(--fuchsia); border-color: var(--fuchsia); color: #000; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 24px; }
+  .card { display: flex; flex-direction: column; border: 1px solid var(--line); background: var(--bg-2); transition: border-color .2s, transform .2s; }
+  .card:hover { border-color: var(--fuchsia); }
+  .card .media { aspect-ratio: 16 / 10; }
+  .card .ph .word { font-size: clamp(56px, 7vw, 92px); }
+  .card .body { padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .meta { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); }
+  .meta .num { color: var(--fuchsia); }
+  .card h3 { font: 800 17px/1.2 var(--wide); text-transform: uppercase; margin: 0; }
+  .card p { margin: 0; color: #d0d0d0; font-size: 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
+  .tags span { font: 400 11px var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--green); border: 1px solid rgba(0,154,93,.45); padding: 4px 8px; }
+  .more {
+    align-self: flex-start; font: 600 12px var(--wide); text-transform: uppercase; letter-spacing: .05em; cursor: pointer;
+    background: none; border: 0; padding: 0; color: var(--fuchsia);
+  }
+  .more::after { content: " ↘"; }
+  .more:hover { text-decoration: underline; }
+  .role-line { color: var(--rose); font-size: 15px; }
+
+  /* ---------- FORMACIÓN ---------- */
+  .cv { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+  .cv > div { padding: 28px; border-left: 1px solid var(--line); }
+  .cv > div:first-child { border-left: 0; }
+  .cv h3 { font: 800 15px var(--wide); text-transform: uppercase; color: var(--fuchsia); margin: 0 0 18px; }
+  .cv ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .cv li b { display: block; font-weight: 600; }
+  .cv li span { font: 400 12px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  @media (max-width: 900px) {
+    .cv { grid-template-columns: 1fr; }
+    .cv > div { border-left: 0; border-top: 1px solid var(--line); }
+    .cv > div:first-child { border-top: 0; }
+  }
+
+  /* ---------- CONTACTO ---------- */
+  .contact { text-align: left; }
+  .contact .big { font: 400 clamp(56px, 11vw, 160px)/.88 var(--display); text-transform: uppercase; margin: 0 0 28px; }
+  .contact .big em { font-style: normal; color: var(--fuchsia); }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    font: 600 13px var(--wide); text-transform: uppercase; letter-spacing: .05em; text-decoration: none;
+    padding: 14px 22px; border: 1px solid var(--fuchsia); color: var(--ink); transition: background .2s, color .2s;
+  }
+  .btn:hover { background: var(--fuchsia); color: #000; }
+  footer { padding: 28px 0 40px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* ---------- MODAL ---------- */
+  dialog {
+    width: min(1100px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 0;
+    background: var(--bg-2); color: var(--ink); border: 1px solid var(--fuchsia);
+  }
+  dialog::backdrop { background: rgba(0,0,0,.85); }
+  .m-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 22px 24px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--bg-2); z-index: 1; }
+  .m-head h3 { font: 800 clamp(18px, 2.4vw, 26px)/1.15 var(--wide); text-transform: uppercase; margin: 6px 0 0; }
+  .m-close { background: none; border: 1px solid var(--line); color: var(--ink); width: 40px; height: 40px; font-size: 22px; cursor: pointer; flex: none; }
+  .m-close:hover { border-color: var(--fuchsia); color: var(--fuchsia); }
+  .m-body { padding: 24px; display: grid; gap: 22px; }
+  .m-body p { margin: 0; max-width: 820px; }
+  .vids { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
+  .vids .v { flex: none; scroll-snap-align: start; background: #000; border: 1px solid var(--line); }
+  .vids .v.yt { width: min(720px, 86vw); aspect-ratio: 16 / 9; }
+  .vids .v.tt { width: 325px; max-width: 80vw; height: 580px; }
+  .vids iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .m-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .m-links a { color: var(--fuchsia); font: 400 13px var(--mono); text-transform: uppercase; letter-spacing: .04em; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 </head>
 <body>
 
-<header>
+<nav class="nav" aria-label="Principal">
   <div class="wrap">
-    <div class="kicker">Portafolio de proyectos</div>
-    <h1>Natalia Sabrina Gonza</h1>
-    <p class="role">Ingeniera en Electrónica · Sistemas embebidos, prototipado e interactividad</p>
-    <p class="bio">
-      Ingeniera en Electrónica (UNM, orientación Redes) y Técnica en Artes Multimediales.
-      Programo microcontroladores desde 2012: empecé con instalaciones interactivas y hoy enseño
-      Sistemas Embebidos con ESP32 en escuelas técnicas preuniversitarias. Me gusta el ciclo completo de un prototipo:
-      diseñarlo, armarlo, programarlo, encontrar la falla y dejarlo documentado.
-    </p>
-    <div class="links" id="links"></div>
-    <div class="skills">
-      <span>ESP32</span><span>Arduino / ATmega</span><span>C / C++</span><span>Comunicación serie</span>
-      <span>Wi-Fi · Bluetooth</span><span>Sensores y actuadores</span><span>GRBL / CNC</span>
-      <span>Processing</span><span>Python</span><span>Impresión 3D</span>
+    <a class="mark" href="#top"><span aria-hidden="true"></span>NG</a>
+    <ul>
+      <li><a class="l" href="#destacados">Destacados</a></li>
+      <li><a class="l" href="#proyectos">Proyectos</a></li>
+      <li><a class="l" href="#formacion">Formación</a></li>
+      <li><a class="l" href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="wave" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path id="w1" fill="none" stroke="#ff198f" stroke-width="2" vector-effect="non-scaling-stroke"/>
+    <path id="w2" fill="none" stroke="#3f4a92" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <div class="wrap">
+    <div class="kicker mono">↘ Portafolio de proyectos</div>
+    <h1>Natalia<br><em>Gonza</em></h1>
+    <p class="role">Ingeniera en Electrónica · <b>sistemas embebidos</b>, prototipado e interactividad</p>
+
+    <div class="scoreboard" role="list">
+      <div role="listitem"><div class="n">2013</div><div class="t">Programando y enseñando Arduino desde</div></div>
+      <div role="listitem"><div class="n" id="count">16</div><div class="t">Proyectos documentados en video</div></div>
+      <div role="listitem"><div class="n">39/39</div><div class="t">Materias aprobadas · Ingeniería UNM</div></div>
+      <div role="listitem"><div class="n">10</div><div class="t">Nota del Taller de Proyecto (CNC)</div></div>
+    </div>
+
+    <div class="about">
+      <p>Ingeniera en Electrónica (UNM, orientación Redes) y Técnica en Artes Multimediales. Empecé con instalaciones interactivas y hoy enseño Sistemas Embebidos con ESP32 en escuelas técnicas preuniversitarias. Me gusta el ciclo completo de un prototipo: diseñarlo, armarlo, programarlo, encontrar la falla y dejarlo documentado.</p>
+      <div class="chips">
+        <span class="chip">ESP32</span><span class="chip">Arduino / AVR</span><span class="chip">C / C++</span>
+        <span class="chip">USB HID</span><span class="chip">Bluetooth · Wi-Fi</span><span class="chip">UART</span>
+        <span class="chip">Motores PAP</span><span class="chip">GRBL / CNC</span><span class="chip">Kinect</span>
+        <span class="chip">Processing</span><span class="chip">Python</span><span class="chip">Impresión 3D</span>
+      </div>
     </div>
   </div>
 </header>
 
-<nav class="filters" aria-label="Filtrar proyectos">
-  <div class="wrap" id="filters"></div>
-</nav>
-
 <main>
-  <div class="wrap">
-    <div class="grid" id="grid"></div>
+  <section class="block" id="destacados">
+    <div class="wrap">
+      <div class="sec-head"><h2><small>01 /</small>Destacados</h2></div>
+      <div class="featured" id="featured"></div>
+    </div>
+  </section>
 
-    <section class="about">
-      <h2>Formación y experiencia</h2>
-      <div class="cols">
+  <section class="block" id="proyectos">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><small>02 /</small>Proyectos</h2>
+        <div class="filters" id="filters" role="group" aria-label="Filtrar proyectos"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="formacion">
+    <div class="wrap">
+      <div class="sec-head"><h2><small>03 /</small>Formación y experiencia</h2></div>
+      <div class="cv">
         <div>
           <h3>Formación</h3>
           <ul>
-            <li>Ingeniería en Electrónica, orientación Redes, UNM (2023)</li>
-            <li>Técnica Universitaria en Electrónica, UNM (2018)</li>
-            <li>Técnica en Artes Multimediales, IUNA/UNA (2011)</li>
-            <li>Tramo de Formación Pedagógica, U. FASTA (2025)</li>
+            <li><b>Ingeniería en Electrónica, orientación Redes</b><span>UNM · 2023</span></li>
+            <li><b>Técnica Universitaria en Electrónica</b><span>UNM · 2018</span></li>
+            <li><b>Técnica en Artes Multimediales</b><span>IUNA / UNA · 2011</span></li>
+            <li><b>Tramo de Formación Pedagógica</b><span>U. FASTA · 2025</span></li>
           </ul>
         </div>
         <div>
           <h3>Experiencia</h3>
           <ul>
-            <li>Profesora de Sistemas Embebidos, Escuela Secundaria UNGS (2022 – hoy)</li>
-            <li>Profesora de Sistemas Electrónicos y Teleinformática, ESPUNM (2024 – hoy)</li>
-            <li>Desarrolladora de sistemas interactivos, MadMultimedia (2015)</li>
-            <li>Taller de Electrónica Interactiva, C. C. General San Martín (2013, 2014, 2016)</li>
+            <li><b>Profesora de Sistemas Embebidos</b><span>Escuela Secundaria UNGS · 2022 – hoy</span></li>
+            <li><b>Profesora de Sistemas Electrónicos y Teleinformática</b><span>ESPUNM · 2024 – hoy</span></li>
+            <li><b>Desarrolladora de sistemas interactivos</b><span>MadMultimedia · 2015</span></li>
+            <li><b>Taller de Electrónica Interactiva</b><span>C. C. General San Martín · 2013 · 2014 · 2016</span></li>
           </ul>
         </div>
         <div>
           <h3>Formación continua</h3>
           <ul>
-            <li>PLC Studio 5000, nivel básico, Lince Automation (2026)</li>
-            <li>Proyecto 4.0: automatización e Industria 4.0, IngeLearn (2026)</li>
-            <li>Masterclass 4.0, IngeLearn (2025)</li>
+            <li><b>PLC Studio 5000, nivel básico</b><span>Lince Automation · 2026</span></li>
+            <li><b>Proyecto 4.0: automatización e Industria 4.0</b><span>IngeLearn · 2026</span></li>
+            <li><b>Masterclass 4.0</b><span>IngeLearn · 2025</span></li>
           </ul>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+
+  <section class="block contact" id="contacto">
+    <div class="wrap">
+      <p class="big">¿Armamos<br>algo <em>juntos?</em></p>
+      <p class="mono" style="color:var(--muted);margin:0 0 24px">Disponible para proyectos freelance y trabajo remoto</p>
+      <div class="btns" id="links"></div>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <div class="wrap">Natalia Sabrina Gonza · Francisco Álvarez, Buenos Aires, Argentina · Disponibilidad para trabajo remoto</div>
+  <div class="wrap mono">
+    <span>© <span id="yr"></span> Natalia Sabrina Gonza</span>
+    <span>Ingeniera en Electrónica</span>
+  </div>
 </footer>
 
+<dialog id="modal" aria-labelledby="m-title">
+  <div class="m-head">
+    <div><div class="mono" id="m-meta" style="color:var(--muted)"></div><h3 id="m-title"></h3></div>
+    <button class="m-close" type="button" aria-label="Cerrar" id="m-close">×</button>
+  </div>
+  <div class="m-body" id="m-body"></div>
+</dialog>
+
 <script>
-/* ===== Datos de contacto: completar antes de publicar (dejar "" para ocultar) ===== */
+/* ===== Datos de contacto: dejar "" para ocultar ===== */
 const CONTACT = {
-  email: "",      // ej.: "tu-correo@gmail.com"
-  linkedin: "",   // ej.: "https://www.linkedin.com/in/..."
+  email: "",
+  linkedin: "",
   github: "https://github.com/nataliagonzaing-cloud",
   youtube: "https://www.youtube.com/@NataliaGonza"
 };
 
 /* ===== Proyectos =====
-   video: { yt: "ID" } para YouTube, { tt: "ID" } para TikTok
-   pending: true muestra una tarjeta punteada (borrarla o completarla antes de publicar) */
+   key: palabra que se muestra cuando el proyecto no tiene miniatura (videos de TikTok)
+   videos: { yt: "ID" } YouTube · { tt: "ID" } TikTok */
 const PROJECTS = [
   {
-    id: "eunoia", featured: true, cat: ["embebidos"],
+    id: "eunoia", featured: true, cat: ["embebidos"], key: "CNC",
     title: "EUNOIA: router CNC para fabricar PCB",
     meta: "2022 · UNM, Taller de Proyecto",
     role: "Proyecto grupal de 3 integrantes · aprobado con 10",
@@ -229,50 +375,42 @@ const PROJECTS = [
     videos: [{ tt: "7056554054926765317" }, { tt: "7062493947440008453" }, { tt: "7103254210283703558" }, { tt: "7142262119294045445" }]
   },
   {
-    id: "madmultimedia", featured: true, cat: ["interactivos"],
-    title: "Juegos interactivos para Imperial Cord",
-    meta: "2015 · MadMultimedia · experiencia laboral",
-    role: "A cargo de toda la electrónica y la programación",
-    desc: "Dos juegos interactivos para activaciones de la marca Imperial Cord. En el simulador de bicicleta, un Arduino Leonardo funciona como periférico de la PC para controlar un juego de bicicleta de licencia libre. En \"Pisá y ganá\", el público juega pisando: combiné Arduino UNO y Kinect con una aplicación desarrollada en Code::Blocks. Me encargué de la electrónica, la programación de las placas y la programación visual.",
-    tags: ["Arduino Leonardo", "Arduino UNO", "Kinect", "Code::Blocks (C/C++)", "Tiempo real"],
-    videos: [{ yt: "xU7lLpEUwy4" }, { yt: "mzVIGX-gXHU" }]
-  },
-  {
-    id: "streamdeck", cat: ["embebidos"],
-    title: "Stream Deck casero para OBS",
-    meta: "2021 · Proyecto personal",
-    desc: "Botonera programable para controlar OBS, hecha con Arduino Leonardo, que la PC reconoce como un periférico USB. Tiene una matriz de 4x4 pulsadores más 4 botones extra, todos con teclas programables. Diseñé la caja y la imprimí en 3D, con cierre de imanes para acceder a la placa.",
-    tags: ["Arduino Leonardo", "USB HID", "Teclado matricial 4x4", "OBS", "Impresión 3D"],
-    videos: [{ tt: "6954467149113019653" }, { tt: "6955490137996348678" }, { tt: "6956374782338174213" }, { tt: "6965547304954662150" }, { tt: "6965947314380737797" }]
-  },
-  {
-    id: "volante", cat: ["embebidos", "docencia"],
-    title: "Volante y pedales para videojuegos con Arduino Leonardo",
-    meta: "Docencia · proyecto de clase",
-    desc: "Volante y pedales para videojuegos en línea, armados para una clase. El giro y los pedales, que vuelven con resorte, se leen con potenciómetros, y el Leonardo convierte esas lecturas en teclas para la PC. El objetivo era que los estudiantes vieran que un potenciómetro alcanza para construir un periférico.",
-    tags: ["Arduino Leonardo", "USB HID", "Entradas analógicas", "Potenciómetros"],
-    videos: [{ tt: "7285703967487675653" }]
-  },
-  {
-    id: "skate", cat: ["interactivos", "docencia"],
-    title: "Simulador de skate",
-    meta: "2016 · Taller de Electrónica Interactiva",
-    desc: "Dispositivo físico para un simulador de skate, hecho para el Taller de Electrónica Interactiva orientado a la programación de placas Arduino. Los videos muestran el armado y las primeras pruebas.",
-    tags: ["Arduino", "Interfaz física"],
-    videos: [{ yt: "NCODMoO7XKo" }, { yt: "2QqdNRkJGW0" }]
-  },
-  {
-    id: "tragos", featured: true, cat: ["embebidos"],
+    id: "tragos", featured: true, cat: ["embebidos"], key: "AVR", ph: true,
     title: "Máquina de hacer tragos",
     meta: "2017 · Proyecto universitario",
     role: "En equipo con Luciano Gutiérrez",
     desc: "Máquina que prepara tragos de forma automática. El trago se elige por Bluetooth; un motor paso a paso con correa lleva la plataforma del vaso hasta cada botella, donde un sistema de imanes la detiene en posición, y un actuador lineal presiona el dosificador para servir. Todo está controlado por un Arduino UNO programado directamente en AVR.",
-    tags: ["AVR (ATmega328P)", "Motor paso a paso", "Actuador lineal", "Bluetooth", "Automatización"],
+    tags: ["AVR (ATmega328P)", "Motor paso a paso", "Actuador lineal", "Bluetooth"],
     videos: [{ yt: "uHyXUMsP3EQ" }]
   },
   {
+    id: "madmultimedia", featured: true, cat: ["interactivos"], key: "MAD",
+    title: "Juegos interactivos para Imperial Cord",
+    meta: "2015 · MadMultimedia · experiencia laboral",
+    role: "A cargo de toda la electrónica y la programación",
+    desc: "Dos juegos interactivos para activaciones de la marca Imperial Cord. En el simulador de bicicleta, un Arduino Leonardo funciona como periférico de la PC para controlar un juego de bicicleta de licencia libre. En \"Pisá y ganá\", el público juega pisando: combiné Arduino UNO y Kinect con una aplicación desarrollada en Code::Blocks. Me encargué de la electrónica, la programación de las placas y la programación visual.",
+    tags: ["Arduino Leonardo", "Arduino UNO", "Kinect", "Code::Blocks (C/C++)"],
+    videos: [{ yt: "mzVIGX-gXHU" }, { yt: "xU7lLpEUwy4" }]
+  },
+  {
+    id: "streamdeck", cat: ["embebidos"], key: "OBS",
+    title: "Stream Deck casero para OBS",
+    meta: "2021 · Proyecto personal",
+    desc: "Botonera programable para controlar OBS, hecha con Arduino Leonardo, que la PC reconoce como un periférico USB. Tiene una matriz de 4x4 pulsadores más 4 botones extra, todos con teclas programables. Diseñé la caja y la imprimí en 3D, con cierre de imanes para acceder a la placa.",
+    tags: ["Arduino Leonardo", "USB HID", "Teclado 4x4", "Impresión 3D"],
+    videos: [{ tt: "6954467149113019653" }, { tt: "6955490137996348678" }, { tt: "6956374782338174213" }, { tt: "6965547304954662150" }, { tt: "6965947314380737797" }]
+  },
+  {
+    id: "volante", cat: ["embebidos", "docencia"], key: "HID",
+    title: "Volante y pedales con Arduino Leonardo",
+    meta: "Docencia · proyecto de clase",
+    desc: "Volante y pedales para videojuegos en línea, armados para una clase. El giro y los pedales, que vuelven con resorte, se leen con potenciómetros, y el Leonardo convierte esas lecturas en teclas para la PC. El objetivo era que los estudiantes vieran que un potenciómetro alcanza para construir un periférico.",
+    tags: ["Arduino Leonardo", "USB HID", "Entradas analógicas"],
+    videos: [{ tt: "7285703967487675653" }]
+  },
+  {
     id: "serial", cat: ["embebidos"],
-    title: "Arduino ↔ Processing por puerto serie con seguimiento de color",
+    title: "Arduino ↔ Processing por puerto serie",
     meta: "2014",
     desc: "Comunicación serie entre la PC y Arduino. Processing sigue un objeto rojo con la webcam (o la posición del mouse), lo convierte a una escala de 0 a 9 y lo muestra en un display de 7 segmentos controlado por Arduino.",
     tags: ["Arduino", "Processing", "UART", "Visión por computadora"],
@@ -281,7 +419,7 @@ const PROJECTS = [
   },
   {
     id: "matriz", cat: ["embebidos"],
-    title: "Matriz LED 7x5 sin integrados ni librerías + joystick de PlayStation",
+    title: "Matriz LED 7x5 sin librerías + joystick",
     meta: "2014",
     desc: "Multiplexado de una matriz LED 7x5 controlada directamente desde Arduino, sin integrados ni librerías extra. En una segunda versión se maneja con el joystick de un mando de PlayStation desarmado.",
     tags: ["Arduino", "Multiplexado", "GPIO"],
@@ -298,34 +436,33 @@ const PROJECTS = [
     extra: { text: "Código", href: "https://nataliagonza.wordpress.com/2014/06/06/display-7-segmentos-con-arduino/" }
   },
   {
+    id: "skate", cat: ["interactivos", "docencia"],
+    title: "Simulador de skate",
+    meta: "2016 · Taller de Electrónica Interactiva",
+    desc: "Dispositivo físico para un simulador de skate, hecho para el Taller de Electrónica Interactiva orientado a la programación de placas Arduino. Los videos muestran el armado y las primeras pruebas.",
+    tags: ["Arduino", "Interfaz física"],
+    videos: [{ yt: "NCODMoO7XKo" }, { yt: "2QqdNRkJGW0" }]
+  },
+  {
     id: "sonora", cat: ["interactivos"],
-    title: "Instalación sonora interactiva y prácticas sonoras",
+    title: "Instalación sonora interactiva",
     meta: "2014 – 2015",
     desc: "tocameMucho es una instalación sonora que genera vínculos a través del contacto físico: cada usuario tiene un patrón sonoro que se vuelve más complejo según la distancia, la posición y el contacto con los demás. Las prácticas previas dibujan ondas sonoras con Processing a partir de blobs captados por Kinect y de objetos de referencia con TUIO.",
-    tags: ["Instalación", "Sonido interactivo", "Kinect", "TUIO", "Processing"],
+    tags: ["Instalación", "Kinect", "TUIO", "Processing"],
     videos: [{ yt: "hbwnRbF5lIM" }, { yt: "8z1-28gbk-0" }, { yt: "ZRxxAJVeWYY" }]
   },
   {
     id: "kinect", cat: ["interactivos"],
-    title: "Kinect + Processing: sistema de partículas",
+    title: "Kinect + Processing: partículas",
     meta: "2014",
     desc: "Sistema de partículas que responde a los blobs captados por Kinect según la distancia, con las librerías diewald_CV_kit y dLibs_freenect.",
     tags: ["Kinect", "Processing", "Visión por computadora"],
     videos: [{ yt: "IIHDymXnQzE" }]
   },
   {
-    id: "ffft", cat: ["embebidos"],
-    title: "Rally Latinoamericano de Innovación: grupo FFFT",
-    meta: "2018 y 2019 · UNM",
-    role: "Trabajo en equipo (Fast and Furious Fourier Transform)",
-    desc: "Prototipos desarrollados en equipo durante el Rally Latinoamericano de Innovación: \"S.O.S Ayuda\" (2019) y un mobiliario innovador para clases y trabajo en grupo (2018).",
-    tags: ["Innovación", "Prototipado rápido", "Trabajo en equipo"],
-    videos: [{ yt: "R2xVWkaLsTk" }, { yt: "xhJd6dvZaM4" }]
-  },
-  {
     id: "tricromatas", cat: ["interactivos"],
     title: "Tricrómatas y modulador de luz RGB",
-    meta: "2014 · Proyecto de tesis (Artes Multimediales)",
+    meta: "2014 · Tesis (Artes Multimediales)",
     desc: "Instalación visual lumínica basada en la síntesis aditiva del color. El modulador de luz muestra cómo se descompone la gama de colores a partir de una iluminación RGB.",
     tags: ["LED RGB", "Control de iluminación"],
     videos: [{ yt: "U4k5OXri5ao" }, { yt: "CJ3XXGdwePk" }]
@@ -339,17 +476,26 @@ const PROJECTS = [
     videos: [{ yt: "ojxLqDDbq1E" }]
   },
   {
-    id: "alumnos", featured: true, cat: ["docencia"],
+    id: "ffft", cat: ["embebidos"],
+    title: "Rally de Innovación: grupo FFFT",
+    meta: "2018 y 2019 · UNM",
+    role: "Trabajo en equipo (Fast and Furious Fourier Transform)",
+    desc: "Prototipos desarrollados en equipo durante el Rally Latinoamericano de Innovación: \"S.O.S Ayuda\" (2019) y un mobiliario innovador para clases y trabajo en grupo (2018).",
+    tags: ["Innovación", "Prototipado rápido", "Trabajo en equipo"],
+    videos: [{ yt: "R2xVWkaLsTk" }, { yt: "xhJd6dvZaM4" }]
+  },
+  {
+    id: "alumnos", cat: ["docencia"], key: "AULA",
     title: "Prácticas con estudiantes de secundaria técnica",
     meta: "Docencia · UNGS y ESPUNM",
     desc: "Prácticas y proyectos con Arduino de las materias que dicto: displays, comunicación Bluetooth con una app, control con el joystick de un mando de PlayStation desarmado y proyectos integradores. Algunas prácticas parten de proyectos publicados en Internet y se adaptan para la clase.",
-    tags: ["Docencia", "Arduino", "Bluetooth", "Displays"],
+    tags: ["Docencia", "Arduino", "Bluetooth"],
     videos: [{ tt: "7135099456298552582" }, { tt: "7117066389961149702" }, { tt: "7114460445506800902" }, { tt: "7106279565722488069" }, { tt: "7106148394229435653" }, { tt: "7104476396071734533" }]
   },
   {
     id: "taller", cat: ["docencia"],
     title: "Taller de Electrónica Interactiva",
-    meta: "2013 · 2014 · 2016 · Centro Cultural General San Martín",
+    meta: "2013 · 2014 · 2016 · C. C. San Martín",
     role: "Dictado junto con Laura Facelli",
     desc: "Taller de electrónica analógica, interacción y programación con Arduino. Diseñamos juntas los contenidos y las piezas gráficas de los cursos.",
     tags: ["Docencia", "Arduino", "Electrónica analógica"],
@@ -366,92 +512,166 @@ const CATS = [
 
 const el = (tag, props = {}, ...kids) => {
   const n = Object.assign(document.createElement(tag), props);
-  kids.flat().forEach(k => k != null && n.append(k));
+  kids.flat().forEach(k => k != null && k !== false && n.append(k));
   return n;
 };
+const pad = n => String(n).padStart(2, "0");
+const svgNS = "http://www.w3.org/2000/svg";
 
-function player(v) {
-  const isTT = !!v.tt;
-  const box = el("div", { className: "player" + (isTT ? " tiktok vertical" : "") });
-  const btn = el("button", { type: "button", ariaLabel: "Reproducir video" });
-  if (!isTT) btn.style.backgroundImage = `url(https://i.ytimg.com/vi/${v.yt}/hqdefault.jpg)`;
-  btn.addEventListener("click", () => {
-    const src = isTT
-      ? `https://www.tiktok.com/embed/v2/${v.tt}`
-      : `https://www.youtube-nocookie.com/embed/${v.yt}?autoplay=1&rel=0`;
-    box.replaceChildren(el("iframe", {
-      src, title: "Video del proyecto", allowFullscreen: true,
-      allow: "autoplay; encrypted-media; picture-in-picture; fullscreen"
-    }));
-  });
-  box.append(btn, el("span", { className: "label", textContent: isTT ? "TikTok" : "YouTube" }));
-  if (isTT) box.append(el("span", { className: "tt-caption", textContent: "Tocá para ver el video" }));
-  return box;
+/* Pista de circuito decorativa, distinta para cada proyecto */
+function trace(seed) {
+  const s = document.createElementNS(svgNS, "svg");
+  s.setAttribute("class", "trace"); s.setAttribute("viewBox", "0 0 400 250"); s.setAttribute("preserveAspectRatio", "none");
+  let r = seed * 9301 + 49297;
+  const rnd = () => ((r = (r * 9301 + 49297) % 233280) / 233280);
+  for (let i = 0; i < 3; i++) {
+    let x = 0, y = 30 + rnd() * 190, d = `M${x} ${y}`;
+    while (x < 400) {
+      x += 40 + rnd() * 80; d += ` H${Math.min(x, 400)}`;
+      if (x < 380 && rnd() > .4) { const dy = (rnd() > .5 ? 1 : -1) * (20 + rnd() * 40); y = Math.max(15, Math.min(235, y + dy)); x += Math.abs(dy) * .6; d += ` L${x} ${y}`; }
+    }
+    const p = document.createElementNS(svgNS, "path");
+    p.setAttribute("d", d); p.setAttribute("fill", "none");
+    p.setAttribute("stroke", i === 0 ? "rgba(255,25,143,.55)" : "rgba(155,181,218,.25)");
+    p.setAttribute("stroke-width", "1.5"); p.setAttribute("vector-effect", "non-scaling-stroke");
+    s.append(p);
+    const c = document.createElementNS(svgNS, "circle");
+    c.setAttribute("cx", 40 + rnd() * 320); c.setAttribute("cy", y); c.setAttribute("r", 3);
+    c.setAttribute("fill", i === 0 ? "#ff198f" : "#9bb5da");
+    s.append(c);
+  }
+  return s;
 }
 
-function card(p) {
-  const c = el("article", { className: "card" + (p.featured ? " featured" : "") + (p.pending ? " pending" : "") });
-  c.dataset.cat = p.cat.join(" ");
-  if (p.videos.length) {
-    const vids = (p.featured || p.videos.some(v => v.tt)) ? p.videos : p.videos.slice(0, 1);
-    c.append(el("div", { className: "media" }, vids.map(player)));
+function media(p, idx) {
+  const n = p.videos.length;
+  const isTT = p.videos.every(v => v.tt);
+  const btn = el("button", { className: "media", type: "button", ariaLabel: `Ver ${n > 1 ? n + " videos" : "video"}: ${p.title}` });
+  if (!isTT && !p.ph) {
+    const first = p.videos.find(v => v.yt);
+    btn.append(el("img", { src: `https://i.ytimg.com/vi/${first.yt}/hqdefault.jpg`, alt: "", loading: "lazy" }));
+  } else {
+    const ph = el("div", { className: "ph" });
+    ph.append(trace(idx + 3), el("span", { className: "word", textContent: p.key || pad(idx + 1) }));
+    btn.append(ph);
   }
-  const body = el("div", { className: "body" },
-    el("div", { className: "meta", textContent: p.meta }),
-    el("h2", { textContent: p.title }),
-    p.role ? el("div", { className: "role-line", textContent: p.role }) : null,
-    el("p", { textContent: p.desc })
+  btn.append(
+    el("span", { className: "badge", textContent: `${isTT ? "TikTok" : "YouTube"} · ${n} ${n > 1 ? "videos" : "video"}` }),
+
+    el("span", { className: "play", ariaHidden: "true" })
   );
-  const moreVids = (!p.featured && !p.videos.some(v => v.tt)) ? p.videos.slice(1) : [];
-  const ttVids = p.videos.filter(v => v.tt);
-  if (moreVids.length || p.extra || ttVids.length) {
-    const x = el("div", { className: "extra" });
-    if (ttVids.length) {
-      x.append(ttVids.length > 1 ? `${ttVids.length} videos · deslizá para verlos · Abrir en TikTok: ` : "");
-      ttVids.forEach((v, i) => {
-        x.append(el("a", { href: `https://www.tiktok.com/@nati_gonza/video/${v.tt}`, target: "_blank", rel: "noopener",
-          textContent: ttVids.length > 1 ? String(i + 1) : "Abrir en TikTok" }), " · ");
-      });
-    }
-    moreVids.forEach((v, i) => {
-      x.append(el("a", { href: `https://www.youtube.com/watch?v=${v.yt}`, target: "_blank", rel: "noopener", textContent: `Ver video ${i + 2}` }), " · ");
-    });
-    if (p.extra) x.append(el("a", { href: p.extra.href, target: "_blank", rel: "noopener", textContent: p.extra.text }));
-    else x.lastChild?.remove();
-    body.append(x);
-  }
-  if (p.tags.length) body.append(el("div", { className: "tags" }, p.tags.map(t => el("span", { textContent: t }))));
-  c.append(body);
+  btn.addEventListener("click", () => openModal(p));
+  return btn;
+}
+
+function tagList(p) { return el("div", { className: "tags" }, p.tags.map(t => el("span", { textContent: t }))); }
+
+function featured(p, idx) {
+  const a = el("article", { className: "feat" });
+  const more = el("button", { className: "more", type: "button", textContent: "Ver videos y detalles" });
+  more.addEventListener("click", () => openModal(p));
+  a.append(media(p, idx), el("div", { className: "body" },
+    el("div", { className: "meta mono" }, el("span", { className: "num", textContent: pad(idx + 1) }), el("span", { textContent: p.meta })),
+    el("h3", { textContent: p.title }),
+    p.role ? el("div", { className: "role-line", textContent: p.role }) : null,
+    el("p", { textContent: p.desc }),
+    tagList(p), more
+  ));
+  return a;
+}
+
+function card(p, idx) {
+  const c = el("article", { className: "card" });
+  c.dataset.cat = p.cat.join(" ");
+  const more = el("button", { className: "more", type: "button", textContent: "Ver más" });
+  more.addEventListener("click", () => openModal(p));
+  c.append(media(p, idx), el("div", { className: "body" },
+    el("div", { className: "meta mono" }, el("span", { className: "num", textContent: pad(idx + 1) }), el("span", { textContent: p.meta })),
+    el("h3", { textContent: p.title }),
+    el("p", { textContent: p.desc }),
+    more, tagList(p)
+  ));
   return c;
 }
 
-function renderLinks() {
-  const box = document.getElementById("links");
-  const L = [
-    CONTACT.email && ["Email", "mailto:" + CONTACT.email],
-    CONTACT.linkedin && ["LinkedIn", CONTACT.linkedin],
-    CONTACT.github && ["GitHub", CONTACT.github],
-    CONTACT.youtube && ["YouTube", CONTACT.youtube]
-  ].filter(Boolean);
-  L.forEach(([t, h]) => box.append(el("a", { href: h, target: h.startsWith("mailto") ? "" : "_blank", rel: "noopener", textContent: t })));
+/* ----- Modal ----- */
+const modal = document.getElementById("modal");
+function openModal(p) {
+  document.getElementById("m-meta").textContent = p.meta;
+  document.getElementById("m-title").textContent = p.title;
+  const body = document.getElementById("m-body");
+  const vids = el("div", { className: "vids" }, p.videos.map(v => el("div", { className: "v " + (v.yt ? "yt" : "tt") },
+    el("iframe", {
+      src: v.yt ? `https://www.youtube-nocookie.com/embed/${v.yt}?rel=0` : `https://www.tiktok.com/embed/v2/${v.tt}`,
+      title: "Video del proyecto", allowFullscreen: true,
+      allow: "encrypted-media; picture-in-picture; fullscreen"
+    }))));
+  const links = el("div", { className: "m-links" },
+    p.videos.map((v, i) => el("a", {
+      href: v.yt ? `https://www.youtube.com/watch?v=${v.yt}` : `https://www.tiktok.com/@nati_gonza/video/${v.tt}`,
+      target: "_blank", rel: "noopener",
+      textContent: `Abrir ${p.videos.length > 1 ? "video " + (i + 1) + " " : ""}en ${v.yt ? "YouTube" : "TikTok"} ↗`
+    })),
+    p.extra ? el("a", { href: p.extra.href, target: "_blank", rel: "noopener", textContent: p.extra.text + " ↗" }) : null
+  );
+  body.replaceChildren(...[
+    vids,
+    p.role ? el("div", { className: "role-line", textContent: p.role }) : null,
+    el("p", { textContent: p.desc }),
+    tagList(p), links
+  ].filter(Boolean));
+  modal.showModal();
 }
+function closeModal() { modal.close(); document.getElementById("m-body").replaceChildren(); }
+document.getElementById("m-close").addEventListener("click", closeModal);
+modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+modal.addEventListener("cancel", e => { e.preventDefault(); closeModal(); });
 
+/* ----- Render ----- */
+const fbox = document.getElementById("featured");
 const grid = document.getElementById("grid");
-PROJECTS.forEach(p => grid.append(card(p)));
-renderLinks();
+PROJECTS.forEach((p, i) => (p.featured ? fbox.append(featured(p, i)) : grid.append(card(p, i))));
+document.getElementById("count").textContent = PROJECTS.length;
+document.getElementById("yr").textContent = new Date().getFullYear();
 
-const fbox = document.getElementById("filters");
+const linksBox = document.getElementById("links");
+[
+  CONTACT.email && ["Email", "mailto:" + CONTACT.email],
+  CONTACT.linkedin && ["LinkedIn", CONTACT.linkedin],
+  CONTACT.github && ["GitHub", CONTACT.github],
+  CONTACT.youtube && ["YouTube", CONTACT.youtube]
+].filter(Boolean).forEach(([t, h]) => linksBox.append(el("a", { className: "btn", href: h, target: h.startsWith("mailto") ? "" : "_blank", rel: "noopener", textContent: t + " ↗" })));
+
+const filters = document.getElementById("filters");
 CATS.forEach(cat => {
   const b = el("button", { type: "button", textContent: cat.label });
   b.setAttribute("aria-pressed", cat.id === "all");
   b.addEventListener("click", () => {
-    fbox.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
-    grid.querySelectorAll(".card").forEach(c => {
-      c.hidden = !(cat.id === "all" || c.dataset.cat.split(" ").includes(cat.id));
-    });
+    filters.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    grid.querySelectorAll(".card").forEach(c => { c.hidden = !(cat.id === "all" || c.dataset.cat.split(" ").includes(cat.id)); });
   });
-  fbox.append(b);
+  filters.append(b);
 });
+
+/* ----- Osciloscopio del encabezado ----- */
+(() => {
+  const w1 = document.getElementById("w1"), w2 = document.getElementById("w2");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const draw = t => {
+    let a = "", b = "";
+    for (let x = 0; x <= 1200; x += 6) {
+      const ph = x / 1200 * Math.PI * 2;
+      const y1 = 150 + Math.sin(ph * 3 + t) * 60 + Math.sin(ph * 11 - t * 1.7) * 12;
+      const sq = Math.sign(Math.sin(ph * 4 - t * .8));
+      const y2 = 210 + sq * 28 + Math.sin(ph * 30 + t * 3) * 3;
+      a += (x ? "L" : "M") + x + " " + y1.toFixed(1);
+      b += (x ? "L" : "M") + x + " " + y2.toFixed(1);
+    }
+    w1.setAttribute("d", a); w2.setAttribute("d", b);
+  };
+  if (reduce) { draw(0); return; }
+  let t = 0; const loop = () => { t += .012; draw(t); requestAnimationFrame(loop); }; loop();
+})();
 </script>
 </body>
 </html>
