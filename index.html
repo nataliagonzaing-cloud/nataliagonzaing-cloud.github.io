@@ -230,6 +230,8 @@
   .vids .v.yt { width: min(720px, 86vw); aspect-ratio: 16 / 9; }
   .vids .v.tt { width: 325px; max-width: 80vw; height: 580px; }
   .vids iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .vids .v.mp4 { width: 252px; max-width: 70vw; aspect-ratio: 9 / 20; }
+  .vids video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
   .docs { display: flex; flex-wrap: wrap; gap: 10px; }
   .doc {
     display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
@@ -430,6 +432,26 @@ const PROJECTS = [
     docs: [{ text: "Memoria técnica (PDF, 143 págs.)", href: "docs/eunoia-cnc-memoria-tecnica.pdf" }]
   },
   {
+    id: "digito", featured: true, cat: ["embebidos"], key: "ESP32",
+    thumb: "img/digito-2.jpg",
+    title: "Dígito gigante de 7 segmentos con ESP32 y NeoPixel",
+    meta: "2025 · Proyecto personal",
+    role: "Diseño, electrónica, programación e impresión 3D propios",
+    desc: "Un dígito de siete segmentos de unos 20 cm que cuenta y cambia de color. Cada segmento lleva LEDs direccionables NeoPixel (WS2812) controlados por un ESP32 desde un solo pin de datos. Diseñé e imprimí en 3D el marco y los segmentos, y el cableado recorre el marco segmento por segmento. Empezó como una versión con Arduino Uno y displays comunes, y evolucionó a esta versión con ESP32.",
+    tags: ["ESP32", "NeoPixel WS2812", "C / C++", "Impresión 3D", "Prototipado"],
+    videos: [
+      { mp4: "vid/digito-colores.mp4", poster: "img/digito-poster-colores.jpg" },
+      { mp4: "vid/digito-conteo.mp4", poster: "img/digito-poster-conteo.jpg" },
+      { mp4: "vid/digito-prueba.mp4", poster: "img/digito-poster-prueba.jpg" }
+    ],
+    photos: [
+      { src: "img/digito-1.jpg", cap: "El marco impreso en 3D con el cableado de cada segmento" },
+      { src: "img/digito-2.jpg", cap: "Todos los segmentos encendidos en blanco" },
+      { src: "img/digito-3.jpg", cap: "Cambio de color: verde" },
+      { src: "img/digito-4.jpg", cap: "Contando en azul" }
+    ]
+  },
+  {
     id: "tragos", featured: true, cat: ["embebidos"], key: "AVR",
     thumb: "img/tragos-4.jpg",
     title: "Máquina de hacer tragos",
@@ -453,9 +475,9 @@ const PROJECTS = [
     thumb: "img/llaveros-uso-4.jpg",
     title: "Taller de Llaveros: de una imagen a una pieza para imprimir en 3D",
     meta: "2026 · Proyecto personal · en desarrollo",
-    role: "Desarrollada con asistencia de IA: definí qué tenía que hacer, probé cada versión y validé las piezas impresas",
-    desc: "Aplicación web que convierte un logo, un dibujo o una silueta en una pieza lista para imprimir en 3D. En seis etapas (imagen, preparación, contornos, diseño, vista 3D y exportación) separa el dibujo del fondo, genera los contornos y arma el modelo con base y relieve. Hace tres tipos de pieza: llaveros con ojal, toppers para torta con palito y cuentas o colgantes con perforación. Exporta 3MF multicolor y STL para Bambu Studio. Está construida sobre Extrudo, un CAD paramétrico libre que corre en el navegador (licencia GPL).",
-    tags: ["React + TypeScript", "CAD paramétrico (Extrudo)", "3MF multicolor", "Impresión 3D", "Desarrollo asistido con IA"],
+    role: "Creada con ayuda de IA · pensada para quienes no saben diseño 3D",
+    desc: "Una herramienta para que cualquier persona, aunque no sepa diseño 3D, pueda crear sus propios llaveros, cuentas o toppers para tortas. Se carga un logo, un dibujo o una silueta, y la aplicación guía todo el proceso en seis pasos: separa el dibujo del fondo, arma los contornos, agrega la base, el relieve y el ojal, el palito o la perforación, y muestra el resultado en 3D. Al final genera un archivo multicolor listo para abrir en Bambu Studio e imprimir. La desarrollé con ayuda de IA: definí cómo tenía que funcionar, probé cada versión y validé las piezas en mi impresora. Está construida sobre Extrudo, un programa de diseño 3D libre que funciona en el navegador.",
+    tags: ["App web", "Impresión 3D multicolor", "Diseño accesible", "React + TypeScript", "Hecha con ayuda de IA"],
     videos: [],
     photos: [
       { src: "img/llaveros-uso-1.jpg", cap: "Topper real · 1: se carga el dibujo (border collie de Pixabay, licencia libre)" },
@@ -766,14 +788,16 @@ function openModal(p) {
   document.getElementById("m-meta").textContent = p.meta;
   document.getElementById("m-title").textContent = p.title;
   const body = document.getElementById("m-body");
-  const vids = el("div", { className: "vids" }, p.videos.map(v => el("div", { className: "v " + (v.yt ? "yt" : "tt") },
+  const vids = el("div", { className: "vids" }, p.videos.map(v => v.mp4
+    ? el("div", { className: "v mp4" }, el("video", { src: v.mp4, poster: v.poster || "", controls: true, playsInline: true, preload: "metadata", muted: true, loop: true }))
+    : el("div", { className: "v " + (v.yt ? "yt" : "tt") },
     el("iframe", {
       src: v.yt ? `https://www.youtube-nocookie.com/embed/${v.yt}?rel=0` : `https://www.tiktok.com/embed/v2/${v.tt}`,
       title: "Video del proyecto", allowFullscreen: true,
       allow: "encrypted-media; picture-in-picture; fullscreen"
     }))));
   const links = el("div", { className: "m-links" },
-    p.videos.map((v, i) => el("a", {
+    p.videos.filter(v => !v.mp4).map((v, i) => el("a", {
       href: v.yt ? `https://www.youtube.com/watch?v=${v.yt}` : `https://www.tiktok.com/@nati_gonza/video/${v.tt}`,
       target: "_blank", rel: "noopener",
       textContent: `Abrir ${p.videos.length > 1 ? "video " + (i + 1) + " " : ""}en ${v.yt ? "YouTube" : "TikTok"} ↗`
