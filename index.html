@@ -6,6 +6,14 @@
 <title>Natalia Gonza · Proyectos</title>
 <meta name="description" content="Portafolio de Natalia Sabrina Gonza, Ingeniera en Electrónica: sistemas embebidos, prototipado e interactividad.">
 <meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nataliagonzaing-cloud.github.io/">
+<meta property="og:title" content="Natalia Gonza · Portafolio de proyectos">
+<meta property="og:description" content="Ingeniera en Electrónica y docente: electrónica, programación e instalaciones interactivas.">
+<meta property="og:image" content="https://nataliagonzaing-cloud.github.io/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,800&family=Bebas+Neue&family=Overpass+Mono:wght@400;600&family=Overpass:wght@300;400;600&display=swap" rel="stylesheet">
@@ -204,6 +212,11 @@
   .contact { text-align: left; }
   .contact .big { font: 400 clamp(56px, 11vw, 160px)/.88 var(--display); text-transform: uppercase; margin: 0 0 28px; }
   .contact .big em { font-style: normal; color: var(--fuchsia); }
+  .mail {
+    display: inline-block; margin: 0 0 28px; color: var(--fuchsia); text-decoration: none; word-break: break-all;
+    font: 800 clamp(18px, 3.4vw, 40px)/1.1 var(--wide); border-bottom: 2px solid transparent; transition: border-color .2s;
+  }
+  .mail:hover { border-bottom-color: var(--fuchsia); }
   .btns { display: flex; flex-wrap: wrap; gap: 12px; }
   .btn {
     font: 600 13px var(--wide); text-transform: uppercase; letter-spacing: .05em; text-decoration: none;
@@ -371,6 +384,7 @@
     <div class="wrap">
       <p class="big">¿Armamos<br>algo <em>juntos?</em></p>
       <p class="mono" style="color:var(--muted);margin:0 0 24px">Disponible para proyectos freelance y trabajo remoto</p>
+      <a class="mail" href="mailto:nataliagonzaing@gmail.com">nataliagonzaing@gmail.com</a>
       <div class="btns" id="links"></div>
     </div>
   </section>
@@ -394,7 +408,7 @@
 <script>
 /* ===== Datos de contacto: dejar "" para ocultar ===== */
 const CONTACT = {
-  email: "",
+  email: "nataliagonzaing@gmail.com",
   linkedin: "",
   github: "https://github.com/nataliagonzaing-cloud",
   youtube: "https://www.youtube.com/@NataliaGonza"
@@ -546,31 +560,17 @@ const PROJECTS = [
     videos: [{ tt: "7285703967487675653" }]
   },
   {
-    id: "serial", cat: ["embebidos"],
-    title: "Arduino ↔ Processing por puerto serie",
-    meta: "2014",
-    desc: "Comunicación serie entre la PC y Arduino. Processing sigue un objeto rojo con la webcam (o la posición del mouse), lo convierte a una escala de 0 a 9 y lo muestra en un display de 7 segmentos controlado por Arduino.",
-    tags: ["Arduino", "Processing", "UART", "Visión por computadora"],
-    videos: [{ yt: "PA-yuah2XHA" }, { yt: "gSb4paAj2d0" }],
-    extra: { text: "Código y conexión", href: "http://nataliagonza.wordpress.com/2014/06/06/78/" }
-  },
-  {
-    id: "matriz", cat: ["embebidos"],
-    title: "Matriz LED 7x5 sin librerías + joystick",
-    meta: "2014",
-    desc: "Multiplexado de una matriz LED 7x5 controlada directamente desde Arduino, sin integrados ni librerías extra. En una segunda versión se maneja con el joystick de un mando de PlayStation desarmado.",
-    tags: ["Arduino", "Multiplexado", "GPIO"],
-    videos: [{ yt: "IeSIhlkmK90" }, { yt: "dQ2-KXNO-HQ" }],
-    extra: { text: "Código y conexión", href: "http://nataliagonza.wordpress.com/2014/06/30/matriz-7-x-5-joystick-de-play-desarmado/" }
-  },
-  {
-    id: "display", cat: ["embebidos"],
-    title: "Contador con display de 7 segmentos",
-    meta: "2014",
-    desc: "Contador con display de 7 segmentos manejado con dos pulsadores desde Arduino.",
-    tags: ["Arduino", "Display 7 segmentos"],
-    videos: [{ yt: "YA6aDnviX5k" }],
-    extra: { text: "Código", href: "https://nataliagonza.wordpress.com/2014/06/06/display-7-segmentos-con-arduino/" }
+    id: "primeros", cat: ["embebidos", "interactivos"], key: "2014",
+    title: "Primeros proyectos con Arduino y Processing",
+    meta: "2014 · Proyectos personales",
+    desc: "Una serie de prácticas con las que aprendí a integrar electrónica y software: una matriz LED 7x5 multiplexada directamente desde Arduino, sin integrados ni librerías, que después manejé con el joystick de un mando de PlayStation desarmado; un contador con display de 7 segmentos y pulsadores; comunicación serie entre Processing y Arduino, donde la webcam sigue un objeto rojo y su posición aparece en el display; y un sistema de partículas que responde al cuerpo captado por una Kinect.",
+    tags: ["Arduino", "Processing", "UART", "Multiplexado", "Kinect"],
+    videos: [{ yt: "PA-yuah2XHA" }, { yt: "IeSIhlkmK90" }, { yt: "dQ2-KXNO-HQ" }, { yt: "YA6aDnviX5k" }, { yt: "gSb4paAj2d0" }, { yt: "IIHDymXnQzE" }],
+    links: [
+      { text: "Código: matriz 7x5 + joystick", href: "http://nataliagonza.wordpress.com/2014/06/30/matriz-7-x-5-joystick-de-play-desarmado/" },
+      { text: "Código: display de 7 segmentos", href: "https://nataliagonza.wordpress.com/2014/06/06/display-7-segmentos-con-arduino/" },
+      { text: "Código: Arduino y Processing por puerto serie", href: "http://nataliagonza.wordpress.com/2014/06/06/78/" }
+    ]
   },
   {
     id: "skate", cat: ["interactivos", "docencia"],
@@ -595,14 +595,6 @@ const PROJECTS = [
     desc: "tocameMucho es una instalación sonora que genera vínculos a través del contacto físico: cada usuario tiene un patrón sonoro que se vuelve más complejo según la distancia, la posición y el contacto con los demás. Las prácticas previas dibujan ondas sonoras con Processing a partir de blobs captados por Kinect y de objetos de referencia con TUIO.",
     tags: ["Instalación", "Kinect", "TUIO", "Processing"],
     videos: [{ yt: "hbwnRbF5lIM" }, { yt: "8z1-28gbk-0" }, { yt: "ZRxxAJVeWYY" }]
-  },
-  {
-    id: "kinect", cat: ["interactivos"],
-    title: "Kinect + Processing: partículas",
-    meta: "2014",
-    desc: "Sistema de partículas que responde a los blobs captados por Kinect según la distancia, con las librerías diewald_CV_kit y dLibs_freenect.",
-    tags: ["Kinect", "Processing", "Visión por computadora"],
-    videos: [{ yt: "IIHDymXnQzE" }]
   },
   {
     id: "tricromatas", cat: ["interactivos"],
@@ -802,7 +794,8 @@ function openModal(p) {
       target: "_blank", rel: "noopener",
       textContent: `Abrir ${p.videos.length > 1 ? "video " + (i + 1) + " " : ""}en ${v.yt ? "YouTube" : "TikTok"} ↗`
     })),
-    p.extra ? el("a", { href: p.extra.href, target: "_blank", rel: "noopener", textContent: p.extra.text + " ↗" }) : null
+    p.extra ? el("a", { href: p.extra.href, target: "_blank", rel: "noopener", textContent: p.extra.text + " ↗" }) : null,
+    (p.links || []).map(l => el("a", { href: l.href, target: "_blank", rel: "noopener", textContent: l.text + " ↗" }))
   );
   const photos = p.photos ? carousel(p) : null;
   body.replaceChildren(...[
@@ -827,7 +820,6 @@ document.getElementById("yr").textContent = new Date().getFullYear();
 
 const linksBox = document.getElementById("links");
 [
-  CONTACT.email && ["Email", "mailto:" + CONTACT.email],
   CONTACT.linkedin && ["LinkedIn", CONTACT.linkedin],
   CONTACT.github && ["GitHub", CONTACT.github],
   CONTACT.youtube && ["YouTube", CONTACT.youtube]
