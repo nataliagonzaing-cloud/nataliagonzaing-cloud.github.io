@@ -251,7 +251,7 @@
     font: 600 12px var(--wide); text-transform: uppercase; letter-spacing: .05em;
     padding: 11px 16px; border: 1px solid var(--fuchsia); color: var(--ink); transition: background .2s, color .2s;
   }
-  .doc::before { content: "PDF"; font: 600 11px var(--mono); background: var(--fuchsia); color: #000; padding: 2px 6px; }
+  .doc::before { content: attr(data-kind); font: 600 11px var(--mono); background: var(--fuchsia); color: #000; padding: 2px 6px; }
   .doc::after { content: "↗"; color: var(--fuchsia); }
   .doc:hover { background: var(--fuchsia); color: #000; }
   .doc:hover::after { color: #000; }
@@ -443,7 +443,7 @@ const PROJECTS = [
       { src: "img/cnc-13.jpg", cap: "Fresando una placa PCB" },
       { src: "img/cnc-14.jpg", cap: "Pista fresada sobre la placa de cobre" }
     ],
-    docs: [{ text: "Memoria técnica (PDF, 143 págs.)", href: "docs/eunoia-cnc-memoria-tecnica.pdf" }]
+    docs: [{ text: "Memoria técnica (143 págs.)", href: "docs/eunoia-cnc-memoria-tecnica.pdf" }]
   },
   {
     id: "digito", featured: true, cat: ["embebidos"], key: "ESP32",
@@ -482,7 +482,10 @@ const PROJECTS = [
       { src: "img/tragos-5.jpg", cap: "Recorrido del carro a lo largo de la máquina" },
       { src: "img/tragos-6.jpg", cap: "Vista interior: dosificadores, carro y correa" }
     ],
-    docs: [{ text: "Informe técnico del proyecto (PDF)", href: "docs/maquina-de-tragos-informe-avr.pdf" }]
+    docs: [
+      { text: "Código en GitHub", href: "https://github.com/nataliagonzaing-cloud/maquina-de-tragos-avr", kind: "CÓDIGO" },
+      { text: "Informe técnico del proyecto", href: "docs/maquina-de-tragos-informe-avr.pdf" }
+    ]
   },
   {
     id: "llaveros", featured: true, cat: ["software"], key: "3D",
@@ -707,7 +710,11 @@ function media(p, idx) {
 function tagList(p) { return el("div", { className: "tags" }, p.tags.map(t => el("span", { textContent: t }))); }
 function docLinks(p) {
   if (!p.docs) return null;
-  return el("div", { className: "docs" }, p.docs.map(d => el("a", { className: "doc", href: d.href, target: "_blank", rel: "noopener", textContent: d.text })));
+  return el("div", { className: "docs" }, p.docs.map(d => {
+    const a = el("a", { className: "doc", href: d.href, target: "_blank", rel: "noopener", textContent: d.text });
+    a.dataset.kind = d.kind || "PDF";
+    return a;
+  }));
 }
 
 function featured(p, idx) {
